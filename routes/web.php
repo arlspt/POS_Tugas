@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
@@ -38,3 +39,6 @@ Route::get('/transaksi', [PenjualanController::class, 'index']);
 
 // Routing Level Page
 Route::get('/level', [LevelController::class, 'index']);
+
+// Routing Kategori page
+Route::get('/kategori', [KategoriController::class, 'index']);
