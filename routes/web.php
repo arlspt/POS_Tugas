@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,6 @@ Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
 
 // Routing Halaman Transaksi
 Route::get('/transaksi', [PenjualanController::class, 'index']);
+
+// Routing Level Page
+Route::get('/level', [LevelController::class, 'index']);
