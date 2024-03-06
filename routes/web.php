@@ -42,3 +42,6 @@ Route::get('/level', [LevelController::class, 'index']);
 
 // Routing Kategori page
 Route::get('/kategori', [KategoriController::class, 'index']);
+
+// Routing UserController
+Route::get('/user', [UserController::class, 'index']);
