@@ -44,9 +44,13 @@ class UserController extends Controller
         // UserModel::create($data);
 
         // Coba akses model UserModel
-        $user = UserModel::findOr(20, ['username', 'nama'], function () {
+        /*$user = UserModel::findOr(20, ['username', 'nama'], function () {
             abort(404);
         }); // Ambil semua data dari tabel m_user
+        return view('level/index', ['data' => $user]);*/
+
+        // Praktikum 2.2
+        $user = UserModel::where('username', 'manager9')->findOrFail();
         return view('level/index', ['data' => $user]);
     }
 }
