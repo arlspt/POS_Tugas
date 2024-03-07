@@ -34,17 +34,19 @@ class UserController extends Controller
         // UserModel::where('username', 'customer-1')->update($data); // Update data user
 
         // Modifikasi Joobshet Pertemuan 4 - Praktikunm 1
-        $data = [
-            'user_id' => 5, // agar user_id pada table terisi semua
-            'level_id' => 2,
-            'username' => 'manager_tiga',
-            'nama' => 'Manager 3',
-            'password' => Hash::make('12345'),
-        ];
-        UserModel::create($data);
+        // $data = [
+        //     'user_id' => 5, // agar user_id pada table terisi semua
+        //     'level_id' => 2,
+        //     'username' => 'manager_tiga',
+        //     'nama' => 'Manager 3',
+        //     'password' => Hash::make('12345'),
+        // ];
+        // UserModel::create($data);
 
         // Coba akses model UserModel
-        $user = UserModel::all(); // Ambil semua data dari tabel m_user
+        $user = UserModel::findOr(20, ['username', 'nama'], function () {
+            abort(404);
+        }); // Ambil semua data dari tabel m_user
         return view('level/index', ['data' => $user]);
     }
 }
