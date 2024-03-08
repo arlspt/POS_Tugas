@@ -50,7 +50,10 @@ class UserController extends Controller
         return view('level/index', ['data' => $user]);*/
 
         // Praktikum 2.2
-        $user = UserModel::where('username', 'manager9')->findOrFail();
+        // $user = UserModel::where('username', 'manager9')->findOrFail();
+        // return view('level/index', ['data' => $user]);
+        // Praktikum 2.3
+        $user = UserModel::where('level_id', 2)->count();
         return view('level/index', ['data' => $user]);
     }
 }
