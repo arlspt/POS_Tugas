@@ -53,7 +53,19 @@ class UserController extends Controller
         // $user = UserModel::where('username', 'manager9')->findOrFail();
         // return view('level/index', ['data' => $user]);
         // Praktikum 2.3
-        $user = UserModel::where('level_id', 2)->count();
+        // $user = UserModel::where('level_id', 2)->count();
+        // return view('level/index', ['data' => $user]);
+
+        $user = UserModel::firstOrCreate(
+            [
+                'username' => 'manager33',
+                'nama' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],
+        );
+        $user->save();
+
         return view('level/index', ['data' => $user]);
     }
 }
