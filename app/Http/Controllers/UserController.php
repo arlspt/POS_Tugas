@@ -78,7 +78,7 @@ class UserController extends Controller
 
         $user->username = 'manager12';
 
-        $user->save();
+        $user->save(); //save
 
         $user->wasChanged(); //true
         $user->wasChanged('username'); //true
