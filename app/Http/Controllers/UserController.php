@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LevelModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -56,15 +57,44 @@ class UserController extends Controller
         // $user = UserModel::where('level_id', 2)->count();
         // return view('level/index', ['data' => $user]);
 
-        $user = UserModel::firstOrCreate(
+        // $user = UserModel::firstOrNew(
+        //     [
+        //         'username' => 'manager33',
+        //         'nama' => 'Manager Tiga Tiga',
+        //     ],
+        // );
+        //$user->save();
+
+
+        // Praktikum 2.5
+        $user = UserModel::create(
             [
-                'username' => 'manager33',
-                'nama' => 'Manager Tiga Tiga',
+                'username' => 'manager11',
+                'nama' => 'Manager11',
                 'password' => Hash::make('12345'),
                 'level_id' => 2
-            ],
+            ]
         );
+
+        $user->username = 'manager12';
+
         $user->save();
+
+        $user->wasChanged(); //true
+        $user->wasChanged('username'); //true
+        $user->wasChanged(['username', 'level_id']); //false
+        $user->wasChanged('nama'); //false
+        //$user->wasChanged(['nama', 'username']); //true
+
+        dd($user->wasChanged(['nama', 'username'])); //true
+
+        // $user->isClean(); //false
+        // $user->isClean('username'); //false
+        // $user->isClean('nama'); //true
+        // $user->isClean(['nama', 'username']); //false
+
+        // $user->isDirty(); //false
+        // $user->isClean(); //true
 
         return view('level/index', ['data' => $user]);
     }
