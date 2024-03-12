@@ -45,3 +45,18 @@ Route::get('/kategori', [KategoriController::class, 'index']);
 
 // Routing UserController
 Route::get('/user', [UserController::class, 'index']);
+
+// Routing Tambah
+Route::get('/user/tambah', [UserController::class, 'tambah']);
+
+// Routing Tambah Simpan
+Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
+
+// Routing Ubah
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+
+// Routing Ubah Simpan
+Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+
+// Routing Hapus
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
