@@ -18,26 +18,36 @@ class KategoriSeeder extends Seeder
                 'kategori_id' => 1,
                 'kategori_kode' => 'ELK12',
                 'kategori_nama' => 'Elektronik',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'kategori_id' => 2,
                 'kategori_kode' => 'KCK09',
                 'kategori_nama' => 'Kecantikan',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'kategori_id' => 3,
                 'kategori_kode' => 'PRT34',
                 'kategori_nama' => 'Peralatan Rumah Tangga',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'kategori_id' => 4,
                 'kategori_kode' => 'LPTP12',
                 'kategori_nama' => 'Laptop',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'kategori_id' => 5,
                 'kategori_kode' => 'HP1231',
                 'kategori_nama' => 'Handphone',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 
