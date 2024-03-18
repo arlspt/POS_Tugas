@@ -14,4 +14,27 @@ class KategoriController extends Controller
         // dd($dataTable);
         return $dataTable->render('kategori.index');
     }
+
+    public function create()
+    {
+        return view('kategori.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi data yang diterima dari form
+        // $request->validate([
+        //     'kodeKategori' => 'required',
+        //     'namaKategori' => 'required',
+        // ]);
+
+        // Buat data kategori baru berdasarkan input dari form
+        KategoriModel::create([
+            'kategori_kode' => $request->kodeKategori,
+            'kategori_nama' => $request->namaKategori,
+        ]);
+
+        // Redirect ke halaman kategori setelah berhasil menyimpan data
+        return redirect('/kategori');
+    }
 }
