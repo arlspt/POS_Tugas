@@ -41,9 +41,11 @@ Route::get('/transaksi', [PenjualanController::class, 'index']);
 Route::get('/level', [LevelController::class, 'index']);
 
 // Routing Kategori page
-Route::get('/kategori', [KategoriController::class, 'index']); //a->name('manage.category')
-Route::get('/kategori/create', [KategoriController::class, 'create']); //->name('category.create')
-Route::post('/kategori', [KategoriController::class, 'store']);
+Route::get('/kategori', [KategoriController::class, 'index'])->name('manage.category');
+Route::get('/kategori/create', [KategoriController::class, 'create'])->name('category.create');
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
+Route::put('/kategori/{id}', [KategoriController::class, 'update']);
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);
 
 // Routing UserController
 Route::get('/user', [UserController::class, 'index']);
