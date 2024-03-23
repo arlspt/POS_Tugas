@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\KategoriDataTable;
 use App\Models\KategoriModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,12 +21,12 @@ class KategoriController extends Controller
         return view('kategori.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // Validasi data yang diterima dari form
-        $request->validate([
-            'kodeKategori' => 'required',
-            'namaKategori' => 'required',
+        $validated = $request->validate([
+            'kodeKategori' => 'bail|required|unique:m_kategori',
+            'namaKategori' => 'bail|required',
         ]);
 
         // Buat data kategori baru berdasarkan input dari form

@@ -42,6 +42,7 @@ Route::get('/level', [LevelController::class, 'index']);
 
 // Routing Kategori page
 Route::get('/kategori', [KategoriController::class, 'index'])->name('manage.category');
+Route::post('/kategori', [KategoriController::class, 'store']);
 Route::get('/kategori/create', [KategoriController::class, 'create'])->name('category.create');
 Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
 Route::put('/kategori/{id}', [KategoriController::class, 'update']);
