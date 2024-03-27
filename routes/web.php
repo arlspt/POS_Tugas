@@ -7,6 +7,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\POSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +43,8 @@ Route::get('/level', [LevelController::class, 'index']);
 
 // Routing Kategori page
 Route::get('/kategori', [KategoriController::class, 'index'])->name('manage.category');
-Route::post('/kategori', [KategoriController::class, 'store']);
 Route::get('/kategori/create', [KategoriController::class, 'create'])->name('category.create');
+Route::post('/kategori', [KategoriController::class, 'store']);
 Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit']);
 Route::put('/kategori/{id}', [KategoriController::class, 'update']);
 Route::get('/kategori/delete/{id}', [KategoriController::class, 'delete']);
@@ -65,3 +66,10 @@ Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
 
 // Routing Hapus
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
+
+// Routing m_user
+Route::resource('m_user', POSController::class);
+
+// Routing Form User dan Level
+Route::get('/formUser', [UserController::class, 'formUser']);
+Route::get('/formLevel', [UserController::class, 'formLevel']);
