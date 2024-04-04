@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\POSController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,8 @@ use App\Http\Controllers\POSController;
 */
 
 // Routing Index Page / Home Page
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
 
 // Routing Product Page
 Route::prefix('category')->group(function () {
@@ -73,3 +74,16 @@ Route::resource('m_user', POSController::class);
 // Routing Form User dan Level
 Route::get('/formUser', [UserController::class, 'formUser']);
 Route::get('/formLevel', [UserController::class, 'formLevel']);
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', [UserController::class, 'index']);        // menampilkan halaman awal user
+    Route::post('/list', [UserController::class, 'list']);    // menampilkan data user dalam bentuk json untuk datatables
+    Route::get('/create', [UserController::class, 'create']); // menampilkan halaman form tambah user
+    Route::post('/', [UserController::class, 'store']);      // menyimpan data user baru
+    Route::get('/{id}', [UserController::class, 'show']);     // menampilkan detail user
+    Route::get('/{id}/edit', [UserController::class, 'edit']); // menampilkan halaman form edit user
+    Route::put('/{id}', [UserController::class, 'update']);    // menyimpan perubahan data user
+    Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
+    Route::post('/store', [UserController::class, 'store']);
+    Route::put('/{id}/update', [UserController::class, 'update']);
+});

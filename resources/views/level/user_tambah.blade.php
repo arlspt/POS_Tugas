@@ -7,12 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create CRUD</title>
 </head>
-
 <body>
     <h1>Form Tambah Data User</h1>
     <form action="/user/tambah_simpan" method="post">
         {{ csrf_field() }}
-
         <label>Username</label>
         <input type="text" name="username" placeholder="Masukkan Username">
         <br>
@@ -27,9 +25,6 @@
         <br>
         <br>
         <input type="submit" class="btn btn-success" value="Simpan">
-
-
     </form>
 </body>
-
 </html>
