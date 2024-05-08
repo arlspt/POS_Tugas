@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class UserModel extends Authenticatable implements JWTSubject
 {
@@ -29,20 +30,23 @@ class UserModel extends Authenticatable implements JWTSubject
     use HasFactory;
 
     protected $table = "m_user";
-    public $timestamps = true;
+    public $timestamps = false;
     protected $primaryKey = 'user_id';
-    protected $fillable = [
-        'username',
-        'nama',
-        'password',
-        'level_id',
-        'image' //tambahan
-    ];
+    // protected $fillable = [
+    //     'user_id',
+    //     'level_id',
+    //     'username',
+    //     'nama',
+    //     'password',
+    // ];
+
+    protected $guarded = [];
 
     public function level(): BelongsTo
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
+
     protected function image(): Attribute
     {
         return Attribute::make(

@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,10 @@ use Illuminate\Support\Facades\Route;
 // Routing Index Page / Home Page
 Route::get('/', [WelcomeController::class, 'index']);
 // Route::get('/', [HomeController::class, 'index']);
+
+// Routing File Upload
+Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
+Route::post('/file-upload', [FileUploadController::class, 'prosesFileUpload']);
 
 // Routing Product Page
 Route::prefix('category')->group(function () {
