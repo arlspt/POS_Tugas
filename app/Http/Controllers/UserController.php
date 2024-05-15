@@ -31,9 +31,8 @@ class UserController extends Controller
     // Ambil data user dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-        $users = UserModel::select('user_id', 'username', 'nama', 'level_id')
+        $users = UserModel::select('user_id', 'username', 'nama', 'level_id', 'image')
             ->with('level');
-
         if ($request->level_id) {
             $users->where('level_id', $request->level_id);
         }
@@ -72,19 +71,29 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'username' => 'required|string|min:3|unique:m_user,username',
             'nama' => 'required|string|max:100',
             'password' => 'required|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048'
         ]);
 
-        UserModel::create([
-            'username' => $request->username,
-            'nama' => $request->nama,
-            'password' => bcrypt($request->password),
-            'level_id' => $request->level_id
-        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $hashedName = $image->hashName();
+            $image->storeAs('public/user', $hashedName);
+        }
+
+        if ($validated) {
+            UserModel::create([
+                'username' => $request->username,
+                'nama' => $request->nama,
+                'password' => bcrypt($request->password),
+                'level_id' => $request->level_id,
+                'image' => $hashedName
+            ]);
+        }
 
         return redirect('/user')->with('success', 'Data user berhasil disimipan');
     }
@@ -130,19 +139,27 @@ class UserController extends Controller
     //Menyimpan perubahan data user
     public function update(Request $request, string $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama' => 'required|string|max:100',
             'password' => 'required|min:5',
-            'level_id' => 'required|integer'
+            'level_id' => 'required|integer',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-
-        UserModel::find($id)->update([
-            'username' => $request->username,
-            'nama' => $request->nama,
-            'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
-            'level_id' => $request->level_id
-        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $hashedName = $image->hashName();
+            $image->storeAs('public/users', $hashedName);
+        }
+        if ($validated) {
+            UserModel::find($id)->update([
+                'username' => $request->username,
+                'nama' => $request->nama,
+                'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
+                'level_id' => $request->level_id,
+                'image' => $hashedName
+            ]);
+        }
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');
     }

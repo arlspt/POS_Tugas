@@ -47,6 +47,15 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <label class="col-2 control-label col-form-label">Upload:</label>
+        <div class="col-10">
+            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}" required>
+            @error('image')
+            <small class="form-text text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+    </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
